@@ -1,164 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>For Pupu 💕</title>
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@300;500&display=swap" rel="stylesheet">
-<style>
-*{margin:0; padding:0; box-sizing:border-box;}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Pupu 💖</title>
+    <style>
+        :root {
+            --pink-soft: #fff0f3;
+            --pink-bright: #ff85a2;
+            --ios-font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+        }
 
-body{
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background: linear-gradient(180deg,#ffd6e8,#fff);
-  overflow:hidden;
-  font-family:'Quicksand',sans-serif;
-}
+        body {
+            background-color: var(--pink-soft);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            font-family: var(--ios-font);
+        }
 
-/* Floating hearts */
-.hearts span{
-  position:absolute;
-  font-size:26px;
-  color:#ff7eb9;
-  animation: float 6s linear infinite;
-}
-@keyframes float{
-  0%{transform:translateY(100vh) rotate(0deg); opacity:1;}
-  100%{transform:translateY(-10vh) rotate(360deg); opacity:0;}
-}
+        /* Card Styling */
+        .card {
+            background: white;
+            width: 340px;
+            padding: 40px 20px;
+            border-radius: 50px;
+            box-shadow: 0 25px 50px rgba(255, 133, 162, 0.3);
+            text-align: center;
+            position: relative;
+            z-index: 5;
+            border: 2px solid rgba(255, 182, 193, 0.5);
+            transition: transform 0.3s ease;
+        }
 
-/* Card */
-.card{
-  width:400px;
-  height:600px;
-  background:#fff;
-  border-radius:36px;
-  box-shadow:0 40px 90px rgba(255,105,180,.35);
-  text-align:center;
-  padding:30px;
-  position:relative;
-  animation: open 1.2s cubic-bezier(.2,.8,.2,1) forwards;
-  opacity:0;
-  transform:scale(.85);
-  cursor:pointer;
-}
-@keyframes open{
-  to{opacity:1; transform:scale(1);}
-}
+        /* Cat Animation: Slide & Peek */
+        .cat-img {
+            position: absolute;
+            width: 140px;
+            top: -110px; /* Adjust based on your cat.png size */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            animation: catWobble 3s infinite ease-in-out;
+        }
 
-/* Title */
-.title{
-  font-family:'Pacifico', cursive;
-  font-size:36px;
-  color:#ff4d88;
-  margin-top:10px;
-}
+        @keyframes catWobble {
+            0%, 100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+            25% { transform: translateX(-50%) translateY(-10px) rotate(-5deg); }
+            75% { transform: translateX(-50%) translateY(-5px) rotate(5deg); }
+        }
 
-/* Message */
-.msg{
-  font-family:'Quicksand',sans-serif;
-  font-size:19px;
-  color:#555;
-  margin-top:25px;
-  line-height:1.8;
-}
+        /* Photo with Glowing Effect */
+        .photo-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
 
-.orchid{
-  font-family:'Pacifico', cursive;
-  color:#ff5fa2;
-  font-size:22px;
-  font-weight:600;
-}
+        .profile-img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 0 20px rgba(255, 133, 162, 0.6);
+            position: relative;
+            z-index: 6;
+        }
 
-/* Her photo */
-.photo{
-  width:170px;
-  height:170px;
-  border-radius:50%;
-  background:url('her-photo.jpg') center/cover no-repeat;
-  margin:25px auto;
-  opacity:0;
-  animation: fade 1s ease forwards;
-  animation-delay:2s;
-}
-@keyframes fade{
-  to{opacity:1;}
-}
+        .glow-ring {
+            position: absolute;
+            top: -5px; left: -5px; right: -5px; bottom: -5px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff85a2, #ffb6c1, #ff1493);
+            animation: rotateGlow 3s linear infinite;
+            z-index: 5;
+        }
 
-/* Cat image */
-.cat-img{
-  position:absolute;
-  top:-200px; /* start above */
-  left:50%;
-  transform:translateX(-50%);
-  width:150px; /* big cat */
-  animation: catSlide 2s ease forwards;
-  animation-delay:2.5s;
-}
-@keyframes catSlide{
-  0%{top:-200px;}
-  50%{top:200px;}
-  100%{top:420px;} /* end near bottom of card */
-}
+        @keyframes rotateGlow {
+            0% { transform: rotate(0deg); opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { transform: rotate(360deg); opacity: 0.5; }
+        }
 
-/* Pulse heart below text */
-.pulse-heart{
-  font-size:32px;
-  animation:pulse 1.5s infinite;
-  margin-top:15px;
-}
-@keyframes pulse{
-  0%,100%{transform:scale(1);}
-  50%{transform:scale(1.2);}
-}
+        /* Text Styles */
+        h1 {
+            color: #c2185b;
+            font-size: 2.2rem;
+            margin: 10px 0;
+            letter-spacing: -1px;
+        }
 
-/* Hide audio visually */
-audio{display:none;}
-</style>
+        p {
+            color: #880e4f;
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        /* Heart Pulse */
+        .pulse-heart {
+            font-size: 60px;
+            cursor: pointer;
+            display: inline-block;
+            animation: heartBeat 1.2s infinite;
+            margin-top: 10px;
+        }
+
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            15% { transform: scale(1.3); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.15); }
+            60% { transform: scale(1); }
+        }
+
+        /* Background Floating Hearts */
+        .heart {
+            position: absolute;
+            color: #ffb6c1;
+            font-size: 20px;
+            user-select: none;
+            pointer-events: none;
+            animation: floatUp 5s linear forwards;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+    </style>
 </head>
-<body>
+<body onclick="startExperience()">
 
-<!-- floating hearts -->
-<div class="hearts">
-  <span style="left:10%;">💗</span>
-  <span style="left:30%;">💞</span>
-  <span style="left:50%;">💕</span>
-  <span style="left:70%;">💓</span>
-  <span style="left:85%;">💖</span>
-</div>
+    <div class="card-wrapper">
+        <img src="cat.png" alt="Cat" class="cat-img">
+        
+        <div class="card">
+            <div class="photo-container">
+                <div class="glow-ring"></div>
+                <img src="her-photo.jpg" alt="Pupu" class="profile-img">
+            </div>
+            
+            <h1>Pupu! ✨</h1>
+            <p>Happy Birthday to the most <br> <b>pyaari</b> person in the world!</p>
+            
+            <div class="pulse-heart">❤️</div>
+            <p style="font-size: 0.7rem; color: #ff85a2; margin-top: 15px;">TAP TO PLAY MUSIC</p>
+        </div>
+    </div>
 
-<!-- Card -->
-<div class="card" onclick="playSong()">
-  <div class="title">Happy Birthday, Pupu 💕</div>
-  <div class="msg">
-    From your <span class="orchid">Little Orchid 🌸</span><br>
-    Some people don’t leave the heart<br>
-    when they leave the conversation.<br><br>
-    Even if our paths never cross again,<br>
-    I’ll always be grateful that once…<br>
-    you were mine to care for 💗
-  </div>
+    <audio id="bgMusic" loop>
+        <source src="song.mp3" type="audio/mpeg">
+    </audio>
 
-  <div class="photo"></div>
-  <div class="pulse-heart">💗</div>
+    <script>
+        function startExperience() {
+            // Play Music
+            const audio = document.getElementById("bgMusic");
+            audio.play().catch(e => console.log("Audio needs user interaction first"));
 
-  <!-- Cat image -->
-  <img src="cat.png" class="cat-img">
-</div>
+            // Create hearts on tap
+            for(let i=0; i<5; i++) {
+                createFloatingHeart();
+            }
+        }
 
-<!-- Song -->
-<audio id="mySong" loop>
-  <source src="song.mp3" type="audio/mpeg">
-</audio>
+        function createFloatingHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
+            document.body.appendChild(heart);
+            
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
 
-<script>
-function playSong(){
-  var audio = document.getElementById('mySong');
-  audio.play();
-}
-</script>
-
+        // Constant floating hearts
+        setInterval(createFloatingHeart, 400);
+    </script>
 </body>
 </html>
