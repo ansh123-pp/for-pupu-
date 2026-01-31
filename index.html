@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Special Surprise for Pupu 💖</title>
+    <title>Birthday Surprise for Pupu 💖</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --pink-primary: #ff758c;
+            --pink-main: #ff758c;
             --pink-dark: #ff4d6d;
             --pink-light: #ffdeeb;
+            --text-gray: #444;
         }
 
         body, html {
@@ -18,29 +19,29 @@
             background: radial-gradient(circle, #fff0f3 0%, #ffdeeb 100%);
             font-family: 'Quicksand', sans-serif;
             display: flex; justify-content: center; align-items: center;
-            perspective: 1500px; overflow: hidden;
+            perspective: 2000px; overflow: hidden;
         }
 
-        /* Envelope Container - SLOW TRANSITION */
+        /* The Envelope - Slower Transitions */
         .envelope-wrapper {
             position: relative;
             width: 320px; height: 220px;
-            background-color: var(--pink-primary);
+            background-color: var(--pink-main);
             border-radius: 0 0 15px 15px;
             cursor: pointer;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
             z-index: 10;
-            transition: transform 1s ease;
+            transition: transform 1.2s ease;
         }
 
-        /* Flap of the envelope */
+        /* Top Flap */
         .envelope-wrapper::before {
             content: ""; position: absolute; top: 0; z-index: 4;
             border-left: 160px solid transparent;
             border-right: 160px solid transparent;
-            border-top: 110px solid #ff4d6d;
+            border-top: 115px solid #ff4d6d;
             transform-origin: top;
-            transition: transform 1.2s ease; /* Slower flap */
+            transition: transform 1.5s ease-in-out; /* Slow Flap */
         }
 
         .envelope-wrapper.open::before {
@@ -48,138 +49,143 @@
             z-index: 0;
         }
 
-        /* The Surprise Card - SLOWER POP UP */
+        /* The Card - Very Slow Pop-Up for Premium Feel */
         .card {
             position: absolute;
-            bottom: 5px; left: 10px;
-            width: 300px; height: 420px;
+            bottom: 10px; left: 10px;
+            width: 300px; height: 430px;
             background: white;
-            border-radius: 25px;
-            padding: 25px;
+            border-radius: 30px;
+            padding: 30px 20px;
             text-align: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            transition: transform 1.8s 0.8s ease-out; /* Slow pop up */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 2.2s 1s ease-out; /* Pop-up starts after flap opens */
             z-index: 2;
             box-sizing: border-box;
+            border: 1px solid rgba(255, 117, 140, 0.2);
         }
 
         .envelope-wrapper.open .card {
-            transform: translateY(-320px);
+            transform: translateY(-340px);
         }
 
         .profile-img {
-            width: 120px; height: 120px;
+            width: 130px; height: 130px;
             border-radius: 50%;
-            border: 5px solid var(--pink-light);
+            border: 6px solid var(--pink-light);
             object-fit: cover;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(255, 117, 140, 0.3);
         }
 
         h1 {
             font-family: 'Dancing Script', cursive;
             color: var(--pink-dark);
-            font-size: 2rem;
-            margin: 0 0 10px 0;
+            font-size: 2.2rem;
+            margin: 0 0 15px 0;
         }
 
-        .letter-text {
-            font-size: 1rem;
-            color: #555;
-            line-height: 1.5;
-            margin-bottom: 10px;
+        .message {
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            line-height: 1.6;
+            padding: 0 10px;
         }
 
-        /* Cat Animation: Medium, Side Position, Zoom Out */
+        /* Cat Animation: Medium, Positioned at Bottom-Right */
         .cat-box {
             position: fixed;
-            bottom: 10%; right: 5%; /* Side position to keep text clear */
+            bottom: 50px; right: 20px;
             transform: scale(0);
             z-index: 100;
             pointer-events: none;
             opacity: 0;
         }
 
-        .cat-img { width: 140px; } /* Medium Size */
+        .cat-img { width: 150px; } /* Medium Size */
 
         .cat-active {
-            animation: catLifecycle 7s forwards ease-in-out;
-            animation-delay: 2.5s; /* Comes after card is fully open */
+            animation: catMagic 8s forwards ease-in-out;
+            animation-delay: 3.5s; /* Comes after Pupu has read the card */
         }
 
-        @keyframes catLifecycle {
-            0% { transform: scale(0); opacity: 0; }
-            15% { transform: scale(1); opacity: 1; } /* Zoom In */
-            85% { transform: scale(1.1); opacity: 1; }
-            100% { transform: scale(4); opacity: 0; filter: blur(20px); } /* Big Zoom Out disappearance */
+        @keyframes catMagic {
+            0% { transform: scale(0) rotate(-10deg); opacity: 0; }
+            15% { transform: scale(1) rotate(0deg); opacity: 1; } /* Zoom In */
+            80% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(5); opacity: 0; filter: blur(30px); } /* Huge Zoom Out Exit */
         }
 
+        /* Hearts */
         .heart {
             position: fixed; bottom: -20px;
-            animation: float 6s linear infinite;
-            color: var(--pink-primary);
+            animation: floatUp 6s linear infinite;
+            color: var(--pink-main);
+            z-index: 1;
         }
 
-        @keyframes float {
-            to { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        @keyframes floatUp {
+            to { transform: translateY(-110vh) rotate(45deg); opacity: 0; }
         }
 
-        .hint-text {
-            position: absolute; bottom: -40px; left: 50%;
-            transform: translateX(-50%);
-            width: 100%; color: var(--pink-dark); font-size: 0.9rem;
+        .instruction {
+            position: absolute; top: 45%; width: 100%;
+            text-align: center; color: white;
+            font-weight: 600; letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
     </style>
 </head>
 <body>
 
-    <div class="envelope-wrapper" id="envelope" onclick="openCard()">
-        <div style="position:absolute; top:40%; left:30%; color:white; font-weight:bold; z-index:5;">Open for Pupu 💌</div>
+    <div class="envelope-wrapper" id="envelope" onclick="startSurprise()">
+        <div class="instruction" id="tapText">TAP TO OPEN 💌</div>
         
         <div class="card">
             <img src="her-photo.jpg" alt="Pupu" class="profile-img">
-            <h1>For You, Pupu!</h1>
-            <p class="letter-text">From your <b>Little Orchid 🌸</b></p>
-            <p class="letter-text">"Some people don't leave the heart when they leave the conversation."</p>
-            <p class="letter-text">I'll always be grateful that once... you were mine to care for. 💖</p>
-            <div style="font-size: 25px;">🎂✨</div>
+            <h1>For Pupu! ✨</h1>
+            <p class="message">From your <b>Little Orchid 🌸</b></p>
+            <p class="message">"Some people don't leave the heart when they leave the conversation."</p>
+            <p class="message">I'm so grateful for every moment. You are special. 💖</p>
+            <div style="font-size: 30px; margin-top: 10px;">🎂</div>
         </div>
-
-        <div class="hint-text">Click to Open</div>
     </div>
 
     <div class="cat-box" id="catBox">
-        <img src="cat.png" class="cat-img" alt="Cat">
+        <img src="cat.png" class="cat-img" alt="Cute Cat">
     </div>
 
-    <audio id="bgSong" loop>
+    <audio id="birthdaySong" loop>
         <source src="song.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-        function openCard() {
+        function startSurprise() {
             const envelope = document.getElementById('envelope');
-            const song = document.getElementById('bgSong');
+            const song = document.getElementById('birthdaySong');
             const catBox = document.getElementById('catBox');
+            const tapText = document.getElementById('tapText');
 
-            // 1. Slow Open
+            // 1. Open Envelope and Card
             envelope.classList.add('open');
+            tapText.style.opacity = '0';
 
-            // 2. Play Music
-            song.play().catch(e => console.log("Tap to play"));
+            // 2. Play Audio
+            song.play().catch(() => console.log("User interaction required"));
 
-            // 3. Trigger Cat Animation (Slower Delay)
+            // 3. Cat Surprise (Wait for pop-up to finish)
             catBox.classList.add('cat-active');
 
             // 4. Background Hearts
-            setInterval(createHeart, 500);
+            setInterval(spawnHeart, 400);
         }
 
-        function createHeart() {
+        function spawnHeart() {
             const heart = document.createElement('div');
             heart.className = 'heart';
             heart.innerHTML = '❤️';
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            heart.style.fontSize = Math.random() * 15 + 15 + 'px';
             document.body.appendChild(heart);
             setTimeout(() => heart.remove(), 6000);
         }
