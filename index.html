@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>For Pupu 💕</title>
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@300;500&display=swap" rel="stylesheet">
-
 <style>
 *{margin:0; padding:0; box-sizing:border-box;}
 
@@ -32,8 +31,8 @@ body{
 
 /* Card */
 .card{
-  width:380px;
-  height:580px;
+  width:400px;
+  height:600px;
   background:#fff;
   border-radius:36px;
   box-shadow:0 40px 90px rgba(255,105,180,.35);
@@ -43,6 +42,7 @@ body{
   animation: open 1.2s cubic-bezier(.2,.8,.2,1) forwards;
   opacity:0;
   transform:scale(.85);
+  cursor:pointer;
 }
 @keyframes open{
   to{opacity:1; transform:scale(1);}
@@ -90,22 +90,22 @@ body{
 /* Cat image */
 .cat-img{
   position:absolute;
-  top:-180px; /* start above */
+  top:-200px; /* start above */
   left:50%;
   transform:translateX(-50%);
-  width:120px; /* bigger cat */
+  width:150px; /* big cat */
   animation: catSlide 2s ease forwards;
-  animation-delay:2.2s;
+  animation-delay:2.5s;
 }
 @keyframes catSlide{
-  0%{top:-180px;}
-  50%{top:150px;}
+  0%{top:-200px;}
+  50%{top:200px;}
   100%{top:420px;} /* end near bottom of card */
 }
 
 /* Pulse heart below text */
 .pulse-heart{
-  font-size:30px;
+  font-size:32px;
   animation:pulse 1.5s infinite;
   margin-top:15px;
 }
@@ -130,7 +130,7 @@ audio{display:none;}
 </div>
 
 <!-- Card -->
-<div class="card">
+<div class="card" onclick="playSong()">
   <div class="title">Happy Birthday, Pupu 💕</div>
   <div class="msg">
     From your <span class="orchid">Little Orchid 🌸</span><br>
@@ -149,9 +149,16 @@ audio{display:none;}
 </div>
 
 <!-- Song -->
-<audio autoplay loop controls>
+<audio id="mySong" loop>
   <source src="song.mp3" type="audio/mpeg">
 </audio>
+
+<script>
+function playSong(){
+  var audio = document.getElementById('mySong');
+  audio.play();
+}
+</script>
 
 </body>
 </html>
