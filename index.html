@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Birthday Surprise for Pupu 💖</title>
+    <title>Special Surprise for Pupu 💖</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --pink-primary: #ff758c;
+            --pink-dark: #ff4d6d;
             --pink-light: #ffdeeb;
-            --text-color: #4a4a4a;
         }
 
         body, html {
@@ -18,28 +18,29 @@
             background: radial-gradient(circle, #fff0f3 0%, #ffdeeb 100%);
             font-family: 'Quicksand', sans-serif;
             display: flex; justify-content: center; align-items: center;
-            perspective: 1000px; overflow: hidden;
+            perspective: 1500px; overflow: hidden;
         }
 
-        /* Envelope Container */
+        /* Envelope Container - SLOW TRANSITION */
         .envelope-wrapper {
             position: relative;
-            width: 300px; height: 200px;
+            width: 320px; height: 220px;
             background-color: var(--pink-primary);
             border-radius: 0 0 15px 15px;
             cursor: pointer;
-            transition: transform 0.5s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
             z-index: 10;
+            transition: transform 1s ease;
         }
 
+        /* Flap of the envelope */
         .envelope-wrapper::before {
-            content: ""; position: absolute; top: 0; z-index: 2;
-            border-left: 150px solid transparent;
-            border-right: 150px solid transparent;
-            border-top: 100px solid #ff4d6d;
+            content: ""; position: absolute; top: 0; z-index: 4;
+            border-left: 160px solid transparent;
+            border-right: 160px solid transparent;
+            border-top: 110px solid #ff4d6d;
             transform-origin: top;
-            transition: transform 0.5s 0.3s ease;
+            transition: transform 1.2s ease; /* Slower flap */
         }
 
         .envelope-wrapper.open::before {
@@ -47,74 +48,74 @@
             z-index: 0;
         }
 
-        /* The Surprise Card */
+        /* The Surprise Card - SLOWER POP UP */
         .card {
             position: absolute;
-            bottom: 0; left: 10px;
-            width: 280px; height: 380px;
+            bottom: 5px; left: 10px;
+            width: 300px; height: 420px;
             background: white;
-            border-radius: 20px;
-            padding: 20px;
+            border-radius: 25px;
+            padding: 25px;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.8s 0.5s ease;
-            z-index: 1;
-            transform: translateY(0);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: transform 1.8s 0.8s ease-out; /* Slow pop up */
+            z-index: 2;
+            box-sizing: border-box;
         }
 
         .envelope-wrapper.open .card {
-            transform: translateY(-280px); /* Card pops out */
+            transform: translateY(-320px);
         }
 
-        /* Photo Styles */
         .profile-img {
-            width: 110px; height: 110px;
+            width: 120px; height: 120px;
             border-radius: 50%;
-            border: 4px solid var(--pink-light);
+            border: 5px solid var(--pink-light);
             object-fit: cover;
-            margin-top: 10px;
+            margin-bottom: 15px;
         }
 
         h1 {
             font-family: 'Dancing Script', cursive;
-            color: var(--pink-primary);
-            margin: 10px 0;
-            font-size: 1.8rem;
+            color: var(--pink-dark);
+            font-size: 2rem;
+            margin: 0 0 10px 0;
         }
 
-        p {
-            font-size: 0.9rem;
-            color: var(--text-color);
-            line-height: 1.4;
+        .letter-text {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 10px;
         }
 
-        /* Cat Animation: Medium size + Zoom Disappear */
+        /* Cat Animation: Medium, Side Position, Zoom Out */
         .cat-box {
             position: fixed;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%) scale(0);
+            bottom: 10%; right: 5%; /* Side position to keep text clear */
+            transform: scale(0);
             z-index: 100;
             pointer-events: none;
             opacity: 0;
         }
 
-        .cat-img { width: 180px; } /* Medium Size */
+        .cat-img { width: 140px; } /* Medium Size */
 
         .cat-active {
-            animation: catLifecycle 6s forwards ease-in-out;
+            animation: catLifecycle 7s forwards ease-in-out;
+            animation-delay: 2.5s; /* Comes after card is fully open */
         }
 
         @keyframes catLifecycle {
-            0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
-            20% { transform: translate(-50%, -50%) scale(1); opacity: 1; } /* Zoom In to center */
-            80% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
-            100% { transform: translate(-50%, -50%) scale(3); opacity: 0; filter: blur(10px); } /* Zoom Out Disappear */
+            0% { transform: scale(0); opacity: 0; }
+            15% { transform: scale(1); opacity: 1; } /* Zoom In */
+            85% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(4); opacity: 0; filter: blur(20px); } /* Big Zoom Out disappearance */
         }
 
-        /* Floating Hearts */
         .heart {
             position: fixed; bottom: -20px;
-            animation: float 5s linear infinite;
+            animation: float 6s linear infinite;
             color: var(--pink-primary);
         }
 
@@ -122,25 +123,28 @@
             to { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
         }
 
-        .tap-text {
-            position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            color: white; font-weight: 600; z-index: 5;
+        .hint-text {
+            position: absolute; bottom: -40px; left: 50%;
+            transform: translateX(-50%);
+            width: 100%; color: var(--pink-dark); font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
 
     <div class="envelope-wrapper" id="envelope" onclick="openCard()">
-        <div class="tap-text" id="tapLabel">Tap to Open 💌</div>
+        <div style="position:absolute; top:40%; left:30%; color:white; font-weight:bold; z-index:5;">Open for Pupu 💌</div>
+        
         <div class="card">
             <img src="her-photo.jpg" alt="Pupu" class="profile-img">
-            <h1>Happy Birthday, Pupu!</h1>
-            <p>From your <b>Little Orchid 🌸</b></p>
-            <p>"Some people don't leave the heart when they leave the conversation."</p>
-            <p>I'll always be grateful for you. 💖</p>
-            <span style="font-size: 30px;">🎂</span>
+            <h1>For You, Pupu!</h1>
+            <p class="letter-text">From your <b>Little Orchid 🌸</b></p>
+            <p class="letter-text">"Some people don't leave the heart when they leave the conversation."</p>
+            <p class="letter-text">I'll always be grateful that once... you were mine to care for. 💖</p>
+            <div style="font-size: 25px;">🎂✨</div>
         </div>
+
+        <div class="hint-text">Click to Open</div>
     </div>
 
     <div class="cat-box" id="catBox">
@@ -156,22 +160,18 @@
             const envelope = document.getElementById('envelope');
             const song = document.getElementById('bgSong');
             const catBox = document.getElementById('catBox');
-            const tapLabel = document.getElementById('tapLabel');
 
-            // 1. Open Envelope
+            // 1. Slow Open
             envelope.classList.add('open');
-            tapLabel.style.display = 'none';
 
             // 2. Play Music
-            song.play();
+            song.play().catch(e => console.log("Tap to play"));
 
-            // 3. Cat Animation (Wait for card to pop up)
-            setTimeout(() => {
-                catBox.classList.add('cat-active');
-            }, 1500);
+            // 3. Trigger Cat Animation (Slower Delay)
+            catBox.classList.add('cat-active');
 
-            // 4. Start Floating Hearts
-            setInterval(createHeart, 400);
+            // 4. Background Hearts
+            setInterval(createHeart, 500);
         }
 
         function createHeart() {
@@ -180,9 +180,8 @@
             heart.innerHTML = '❤️';
             heart.style.left = Math.random() * 100 + 'vw';
             heart.style.fontSize = Math.random() * 20 + 10 + 'px';
-            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
             document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 5000);
+            setTimeout(() => heart.remove(), 6000);
         }
     </script>
 </body>
