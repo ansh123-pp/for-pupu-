@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Pupu 💗</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;}
+
+body{
+  margin:0;
+  height:100vh;
+  background: linear-gradient(180deg,#ffd6e8,#fff);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Poppins',sans-serif;
+  overflow:hidden;
+}
+
+.hearts span{
+  position:absolute;
+  color:#ff7eb9;
+  animation: float 6s linear infinite;
+  font-size:18px;
+}
+
+@keyframes float{
+  from{transform:translateY(100vh); opacity:1;}
+  to{transform:translateY(-10vh); opacity:0;}
+}
+
+.card{
+  width:320px;
+  height:460px;
+  background:#fff;
+  border-radius:32px;
+  box-shadow:0 30px 60px rgba(255,105,180,.35);
+  animation: open 1.2s cubic-bezier(.2,.8,.2,1) forwards;
+  opacity:0;
+  transform:scale(.85);
+  text-align:center;
+  padding:24px;
+  position:relative;
+}
+
+@keyframes open{
+  to{opacity:1; transform:scale(1);}
+}
+
+.title{
+  font-family:'Pacifico',cursive;
+  color:#ff4d88;
+  font-size:28px;
+  margin-top:10px;
+}
+
+.msg{
+  font-size:15px;
+  color:#555;
+  margin-top:14px;
+  line-height:1.6;
+}
+
+.orchid{
+  color:#ff6fae;
+  font-weight:500;
+}
+
+.photo{
+  width:130px;
+  height:130px;
+  border-radius:50%;
+  background:url('her-photo.jpg') center/cover;
+  margin:20px auto;
+  opacity:0;
+  animation: fade 1s ease forwards;
+  animation-delay:2.2s;
+}
+
+@keyframes fade{
+  to{opacity:1;}
+}
+
+.cat{
+  position:absolute;
+  bottom:-120px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:64px;
+  animation: cat 1s ease forwards;
+  animation-delay:1.4s;
+}
+
+@keyframes cat{
+  to{bottom:20px;}
+}
+
+audio{display:none;}
+</style>
+</head>
+
+<body>
+
+<div class="hearts">
+  <span style="left:10%;">💗</span>
+  <span style="left:30%;">💞</span>
+  <span style="left:60%;">💕</span>
+  <span style="left:80%;">💓</span>
+</div>
+
+<div class="card">
+  <div class="title">Happy Birthday, Pupu 💕</div>
+
+  <div class="msg">
+    From your <span class="orchid">Little Orchid 🌸</span><br>
+    Some feelings don’t end…<br>
+    they just learn to stay soft.
+  </div>
+
+  <div class="photo"></div>
+
+  <div class="cat">🐱</div>
+</div>
+
+<audio autoplay loop>
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+</body>
+</html>
