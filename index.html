@@ -2,21 +2,20 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For Pupu 💗</title>
+<title>For Pupu 💕</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@300;500&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box;}
+*{box-sizing:border-box; margin:0; padding:0;}
 
 body{
-  margin:0;
   height:100vh;
-  background: linear-gradient(180deg,#ffd6e8,#fff);
   display:flex;
   align-items:center;
   justify-content:center;
-  font-family:'Poppins',sans-serif;
+  font-family:'Quicksand', sans-serif;
+  background: linear-gradient(180deg,#ffd6e8,#fff);
   overflow:hidden;
 }
 
@@ -24,25 +23,25 @@ body{
   position:absolute;
   color:#ff7eb9;
   animation: float 6s linear infinite;
-  font-size:18px;
+  font-size:22px;
 }
 
 @keyframes float{
-  from{transform:translateY(100vh); opacity:1;}
-  to{transform:translateY(-10vh); opacity:0;}
+  0%{transform:translateY(100vh) rotate(0deg); opacity:1;}
+  100%{transform:translateY(-10vh) rotate(360deg); opacity:0;}
 }
 
 .card{
-  width:320px;
-  height:460px;
+  width:360px;
+  height:520px;
   background:#fff;
   border-radius:32px;
-  box-shadow:0 30px 60px rgba(255,105,180,.35);
+  box-shadow:0 40px 80px rgba(255,105,180,.35);
   animation: open 1.2s cubic-bezier(.2,.8,.2,1) forwards;
   opacity:0;
   transform:scale(.85);
   text-align:center;
-  padding:24px;
+  padding:28px;
   position:relative;
 }
 
@@ -51,30 +50,33 @@ body{
 }
 
 .title{
-  font-family:'Pacifico',cursive;
+  font-family:'Pacifico', cursive;
   color:#ff4d88;
-  font-size:28px;
+  font-size:34px;
   margin-top:10px;
 }
 
 .msg{
-  font-size:15px;
+  font-family:'Quicksand', sans-serif;
+  font-size:18px;
   color:#555;
-  margin-top:14px;
-  line-height:1.6;
+  margin-top:22px;
+  line-height:1.8;
 }
 
 .orchid{
-  color:#ff6fae;
-  font-weight:500;
+  color:#ff5fa2;
+  font-weight:600;
+  font-family:'Pacifico', cursive;
+  font-size:20px;
 }
 
 .photo{
-  width:130px;
-  height:130px;
+  width:150px;
+  height:150px;
   border-radius:50%;
-  background:url('her-photo.jpg') center/cover;
-  margin:20px auto;
+  background:url('her-photo.jpg') center/cover no-repeat;
+  margin:22px auto;
   opacity:0;
   animation: fade 1s ease forwards;
   animation-delay:2.2s;
@@ -86,16 +88,29 @@ body{
 
 .cat{
   position:absolute;
-  bottom:-120px;
+  top:-150px;
   left:50%;
   transform:translateX(-50%);
-  font-size:64px;
-  animation: cat 1s ease forwards;
-  animation-delay:1.4s;
+  width:80px;
+  animation: catSlide 1.5s ease forwards;
+  animation-delay:2s;
 }
 
-@keyframes cat{
-  to{bottom:20px;}
+@keyframes catSlide{
+  0%{top:-150px;}
+  50%{top:50px;}
+  100%{top:20px;}
+}
+
+.pulse-heart{
+  font-size:24px;
+  animation:pulse 1.5s infinite;
+  margin-top:10px;
+}
+
+@keyframes pulse{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.2);}
 }
 
 audio{display:none;}
@@ -104,28 +119,37 @@ audio{display:none;}
 
 <body>
 
+<!-- floating hearts -->
 <div class="hearts">
   <span style="left:10%;">💗</span>
   <span style="left:30%;">💞</span>
-  <span style="left:60%;">💕</span>
-  <span style="left:80%;">💓</span>
+  <span style="left:50%;">💕</span>
+  <span style="left:70%;">💓</span>
+  <span style="left:85%;">💖</span>
 </div>
 
+<!-- card -->
 <div class="card">
   <div class="title">Happy Birthday, Pupu 💕</div>
 
   <div class="msg">
     From your <span class="orchid">Little Orchid 🌸</span><br>
-    Some feelings don’t end…<br>
-    they just learn to stay soft.
+    Some people don’t leave the heart<br>
+    when they leave the conversation.<br><br>
+    Even if our paths never cross again,<br>
+    I’ll always be grateful that once…<br>
+    you were mine to care for 💗
   </div>
 
   <div class="photo"></div>
 
-  <div class="cat">🐱</div>
+  <div class="pulse-heart">💗</div>
+
+  <img src="cat-holding-heart.png" class="cat">
 </div>
 
-<audio autoplay loop>
+<!-- song -->
+<audio autoplay loop controls>
   <source src="song.mp3" type="audio/mpeg">
 </audio>
 
