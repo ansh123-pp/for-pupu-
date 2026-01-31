@@ -3,120 +3,121 @@
 <head>
 <meta charset="UTF-8">
 <title>For Pupu 💕</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@300;500&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box; margin:0; padding:0;}
+*{margin:0; padding:0; box-sizing:border-box;}
 
 body{
   height:100vh;
   display:flex;
-  align-items:center;
   justify-content:center;
-  font-family:'Quicksand', sans-serif;
+  align-items:center;
   background: linear-gradient(180deg,#ffd6e8,#fff);
   overflow:hidden;
+  font-family:'Quicksand',sans-serif;
 }
 
+/* Floating hearts */
 .hearts span{
   position:absolute;
+  font-size:26px;
   color:#ff7eb9;
   animation: float 6s linear infinite;
-  font-size:22px;
 }
-
 @keyframes float{
   0%{transform:translateY(100vh) rotate(0deg); opacity:1;}
   100%{transform:translateY(-10vh) rotate(360deg); opacity:0;}
 }
 
+/* Card */
 .card{
-  width:360px;
-  height:520px;
+  width:380px;
+  height:580px;
   background:#fff;
-  border-radius:32px;
-  box-shadow:0 40px 80px rgba(255,105,180,.35);
+  border-radius:36px;
+  box-shadow:0 40px 90px rgba(255,105,180,.35);
+  text-align:center;
+  padding:30px;
+  position:relative;
   animation: open 1.2s cubic-bezier(.2,.8,.2,1) forwards;
   opacity:0;
   transform:scale(.85);
-  text-align:center;
-  padding:28px;
-  position:relative;
 }
-
 @keyframes open{
   to{opacity:1; transform:scale(1);}
 }
 
+/* Title */
 .title{
   font-family:'Pacifico', cursive;
+  font-size:36px;
   color:#ff4d88;
-  font-size:34px;
   margin-top:10px;
 }
 
+/* Message */
 .msg{
-  font-family:'Quicksand', sans-serif;
-  font-size:18px;
+  font-family:'Quicksand',sans-serif;
+  font-size:19px;
   color:#555;
-  margin-top:22px;
+  margin-top:25px;
   line-height:1.8;
 }
 
 .orchid{
-  color:#ff5fa2;
-  font-weight:600;
   font-family:'Pacifico', cursive;
-  font-size:20px;
+  color:#ff5fa2;
+  font-size:22px;
+  font-weight:600;
 }
 
+/* Her photo */
 .photo{
-  width:150px;
-  height:150px;
+  width:170px;
+  height:170px;
   border-radius:50%;
   background:url('her-photo.jpg') center/cover no-repeat;
-  margin:22px auto;
+  margin:25px auto;
   opacity:0;
   animation: fade 1s ease forwards;
-  animation-delay:2.2s;
+  animation-delay:2s;
 }
-
 @keyframes fade{
   to{opacity:1;}
 }
 
+/* Cat image */
 .cat-img{
   position:absolute;
-  top:-150px;
+  top:-180px; /* start above */
   left:50%;
   transform:translateX(-50%);
-  width:80px;
-  animation: catSlide 1.5s ease forwards;
-  animation-delay:2s;
+  width:120px; /* bigger cat */
+  animation: catSlide 2s ease forwards;
+  animation-delay:2.2s;
 }
-
 @keyframes catSlide{
-  0%{top:-150px;}
-  50%{top:50px;}
-  100%{top:20px;}
+  0%{top:-180px;}
+  50%{top:150px;}
+  100%{top:420px;} /* end near bottom of card */
 }
 
+/* Pulse heart below text */
 .pulse-heart{
-  font-size:24px;
+  font-size:30px;
   animation:pulse 1.5s infinite;
-  margin-top:10px;
+  margin-top:15px;
 }
-
 @keyframes pulse{
   0%,100%{transform:scale(1);}
   50%{transform:scale(1.2);}
 }
 
+/* Hide audio visually */
 audio{display:none;}
 </style>
 </head>
-
 <body>
 
 <!-- floating hearts -->
@@ -128,10 +129,9 @@ audio{display:none;}
   <span style="left:85%;">💖</span>
 </div>
 
-<!-- card -->
+<!-- Card -->
 <div class="card">
   <div class="title">Happy Birthday, Pupu 💕</div>
-
   <div class="msg">
     From your <span class="orchid">Little Orchid 🌸</span><br>
     Some people don’t leave the heart<br>
@@ -142,14 +142,13 @@ audio{display:none;}
   </div>
 
   <div class="photo"></div>
-
   <div class="pulse-heart">💗</div>
 
-  <!-- cute cat image -->
+  <!-- Cat image -->
   <img src="cat.png" class="cat-img">
 </div>
 
-<!-- song -->
+<!-- Song -->
 <audio autoplay loop controls>
   <source src="song.mp3" type="audio/mpeg">
 </audio>
