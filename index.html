@@ -3,184 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Pupu 💖</title>
+    <title>Happy Birthday Pupu 💖</title>
     <style>
         :root {
-            --pink-soft: #fff0f3;
-            --pink-bright: #ff85a2;
-            --ios-font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+            --bg-color: #ffeef2;
+            --pink-dark: #ff4d6d;
+            --ios-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
-        body {
-            background-color: var(--pink-soft);
-            margin: 0;
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            background-color: var(--bg-color);
+            font-family: var(--ios-font);
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
             overflow: hidden;
-            font-family: var(--ios-font);
         }
 
-        /* Card Styling */
+        /* Full screen click layer for music */
+        #overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 100; cursor: pointer;
+            display: flex; justify-content: center; align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
         .card {
             background: white;
-            width: 340px;
-            padding: 40px 20px;
-            border-radius: 50px;
-            box-shadow: 0 25px 50px rgba(255, 133, 162, 0.3);
+            width: 85%;
+            max-width: 350px;
+            padding: 30px;
+            border-radius: 40px;
+            box-shadow: 0 20px 60px rgba(255, 77, 109, 0.2);
             text-align: center;
             position: relative;
-            z-index: 5;
-            border: 2px solid rgba(255, 182, 193, 0.5);
-            transition: transform 0.3s ease;
-        }
-
-        /* Cat Animation: Slide & Peek */
-        .cat-img {
-            position: absolute;
-            width: 140px;
-            top: -110px; /* Adjust based on your cat.png size */
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1;
-            animation: catWobble 3s infinite ease-in-out;
-        }
-
-        @keyframes catWobble {
-            0%, 100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
-            25% { transform: translateX(-50%) translateY(-10px) rotate(-5deg); }
-            75% { transform: translateX(-50%) translateY(-5px) rotate(5deg); }
-        }
-
-        /* Photo with Glowing Effect */
-        .photo-container {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 20px;
+            z-index: 10;
+            border: 2px solid white;
         }
 
         .profile-img {
-            width: 160px;
-            height: 160px;
+            width: 140px; height: 140px;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid white;
-            box-shadow: 0 0 20px rgba(255, 133, 162, 0.6);
-            position: relative;
-            z-index: 6;
+            border: 6px solid #ffb3c1;
+            margin-top: -80px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
-        .glow-ring {
-            position: absolute;
-            top: -5px; left: -5px; right: -5px; bottom: -5px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #ff85a2, #ffb6c1, #ff1493);
-            animation: rotateGlow 3s linear infinite;
-            z-index: 5;
+        h1 { color: var(--pink-dark); font-size: 1.8rem; margin: 15px 0 10px; }
+        p { color: #555; line-height: 1.6; font-size: 1rem; }
+        .highlight { color: var(--pink-dark); font-weight: bold; }
+
+        /* Cat Animation: Slides up, stays, then slides down */
+        .cat-container {
+            position: fixed;
+            bottom: -300px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 50;
+            transition: all 1s ease-in-out;
+            pointer-events: none;
         }
 
-        @keyframes rotateGlow {
-            0% { transform: rotate(0deg); opacity: 0.5; }
-            50% { opacity: 1; }
-            100% { transform: rotate(360deg); opacity: 0.5; }
+        .cat-img {
+            width: 220px; /* Bigger Cat */
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
         }
 
-        /* Text Styles */
-        h1 {
-            color: #c2185b;
-            font-size: 2.2rem;
-            margin: 10px 0;
-            letter-spacing: -1px;
+        .animate-cat {
+            animation: catLifecycle 8s forwards ease-in-out;
         }
 
-        p {
-            color: #880e4f;
-            font-size: 1.1rem;
-            font-weight: 400;
+        @keyframes catLifecycle {
+            0% { bottom: -300px; }
+            15% { bottom: 20px; } /* Slides up */
+            85% { bottom: 20px; opacity: 1; } /* Stays there */
+            100% { bottom: -300px; opacity: 0; } /* Disappears */
         }
 
         /* Heart Pulse */
-        .pulse-heart {
-            font-size: 60px;
-            cursor: pointer;
-            display: inline-block;
-            animation: heartBeat 1.2s infinite;
-            margin-top: 10px;
+        .big-heart {
+            font-size: 40px;
+            animation: heartPulse 1s infinite;
+            display: block;
+            margin: 10px auto;
         }
 
-        @keyframes heartBeat {
-            0% { transform: scale(1); }
-            15% { transform: scale(1.3); }
-            30% { transform: scale(1); }
-            45% { transform: scale(1.15); }
-            60% { transform: scale(1); }
+        @keyframes heartPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
         }
 
-        /* Background Floating Hearts */
-        .heart {
-            position: absolute;
-            color: #ffb6c1;
-            font-size: 20px;
-            user-select: none;
-            pointer-events: none;
-            animation: floatUp 5s linear forwards;
+        .floating-obj {
+            position: absolute; bottom: -50px;
+            animation: floatUp 6s linear infinite;
+            opacity: 0.7;
         }
 
         @keyframes floatUp {
-            0% { transform: translateY(100vh) scale(0); opacity: 1; }
-            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+            to { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
-<body onclick="startExperience()">
+<body>
 
-    <div class="card-wrapper">
-        <img src="cat.png" alt="Cat" class="cat-img">
-        
-        <div class="card">
-            <div class="photo-container">
-                <div class="glow-ring"></div>
-                <img src="her-photo.jpg" alt="Pupu" class="profile-img">
-            </div>
-            
-            <h1>Pupu! ✨</h1>
-            <p>Happy Birthday to the most <br> <b>pyaari</b> person in the world!</p>
-            
-            <div class="pulse-heart">❤️</div>
-            <p style="font-size: 0.7rem; color: #ff85a2; margin-top: 15px;">TAP TO PLAY MUSIC</p>
-        </div>
+    <div id="overlay">
+        <p style="background: white; padding: 10px 20px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">💖 Tap to Open Card 💖</p>
     </div>
 
-    <audio id="bgMusic" loop>
+    <div class="cat-container" id="catBox">
+        <img src="cat.png" class="cat-img" alt="Cat">
+    </div>
+
+    <div class="card">
+        <img src="her-photo.jpg" alt="Pupu" class="profile-img">
+        <h1>Happy Birthday, Pupu! 🎂</h1>
+        <p>From your <span class="highlight">Little Orchid 🌸</span></p>
+        <p>"Some people don't leave the heart when they leave the conversation."</p>
+        <p>I'll always be grateful that once... <br> you were mine to care for. 💖</p>
+        <div class="big-heart">💗</div>
+    </div>
+
+    <audio id="song" loop>
         <source src="song.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-        function startExperience() {
+        const overlay = document.getElementById('overlay');
+        const song = document.getElementById('song');
+        const catBox = document.getElementById('catBox');
+
+        overlay.addEventListener('click', () => {
             // Play Music
-            const audio = document.getElementById("bgMusic");
-            audio.play().catch(e => console.log("Audio needs user interaction first"));
+            song.play();
+            overlay.style.display = 'none';
 
-            // Create hearts on tap
-            for(let i=0; i<5; i++) {
-                createFloatingHeart();
-            }
+            // Start Cat Animation after 1 second
+            setTimeout(() => {
+                catBox.classList.add('animate-cat');
+            }, 1000);
+
+            // Start Floating Elements
+            setInterval(createFloatingElement, 300);
+        });
+
+        function createFloatingElement() {
+            const el = document.createElement('div');
+            el.className = 'floating-obj';
+            const isHeart = Math.random() > 0.3;
+            el.innerHTML = isHeart ? '❤️' : '✨';
+            el.style.left = Math.random() * 100 + 'vw';
+            el.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            el.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 6000);
         }
-
-        function createFloatingHeart() {
-            const heart = document.createElement("div");
-            heart.classList.add("heart");
-            heart.innerHTML = "❤️";
-            heart.style.left = Math.random() * 100 + "vw";
-            heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
-            document.body.appendChild(heart);
-            
-            setTimeout(() => { heart.remove(); }, 5000);
-        }
-
-        // Constant floating hearts
-        setInterval(createFloatingHeart, 400);
     </script>
 </body>
 </html>
