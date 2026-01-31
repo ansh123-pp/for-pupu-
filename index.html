@@ -3,162 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Pupu 💖</title>
+    <title>Birthday Surprise for Pupu 💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #ffeef2;
-            --pink-dark: #ff4d6d;
-            --ios-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --pink-primary: #ff758c;
+            --pink-light: #ffdeeb;
+            --text-color: #4a4a4a;
         }
 
         body, html {
             margin: 0; padding: 0;
             width: 100%; height: 100%;
-            background-color: var(--bg-color);
-            font-family: var(--ios-font);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        /* Full screen click layer for music */
-        #overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 100; cursor: pointer;
+            background: radial-gradient(circle, #fff0f3 0%, #ffdeeb 100%);
+            font-family: 'Quicksand', sans-serif;
             display: flex; justify-content: center; align-items: center;
-            background: rgba(255, 255, 255, 0.1);
+            perspective: 1000px; overflow: hidden;
         }
 
-        .card {
-            background: white;
-            width: 85%;
-            max-width: 350px;
-            padding: 30px;
-            border-radius: 40px;
-            box-shadow: 0 20px 60px rgba(255, 77, 109, 0.2);
-            text-align: center;
+        /* Envelope Container */
+        .envelope-wrapper {
             position: relative;
+            width: 300px; height: 200px;
+            background-color: var(--pink-primary);
+            border-radius: 0 0 15px 15px;
+            cursor: pointer;
+            transition: transform 0.5s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             z-index: 10;
-            border: 2px solid white;
         }
 
+        .envelope-wrapper::before {
+            content: ""; position: absolute; top: 0; z-index: 2;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 100px solid #ff4d6d;
+            transform-origin: top;
+            transition: transform 0.5s 0.3s ease;
+        }
+
+        .envelope-wrapper.open::before {
+            transform: rotateX(180deg);
+            z-index: 0;
+        }
+
+        /* The Surprise Card */
+        .card {
+            position: absolute;
+            bottom: 0; left: 10px;
+            width: 280px; height: 380px;
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.8s 0.5s ease;
+            z-index: 1;
+            transform: translateY(0);
+        }
+
+        .envelope-wrapper.open .card {
+            transform: translateY(-280px); /* Card pops out */
+        }
+
+        /* Photo Styles */
         .profile-img {
-            width: 140px; height: 140px;
+            width: 110px; height: 110px;
             border-radius: 50%;
+            border: 4px solid var(--pink-light);
             object-fit: cover;
-            border: 6px solid #ffb3c1;
-            margin-top: -80px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            margin-top: 10px;
         }
 
-        h1 { color: var(--pink-dark); font-size: 1.8rem; margin: 15px 0 10px; }
-        p { color: #555; line-height: 1.6; font-size: 1rem; }
-        .highlight { color: var(--pink-dark); font-weight: bold; }
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            color: var(--pink-primary);
+            margin: 10px 0;
+            font-size: 1.8rem;
+        }
 
-        /* Cat Animation: Slides up, stays, then slides down */
-        .cat-container {
+        p {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            line-height: 1.4;
+        }
+
+        /* Cat Animation: Medium size + Zoom Disappear */
+        .cat-box {
             position: fixed;
-            bottom: -300px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 50;
-            transition: all 1s ease-in-out;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            z-index: 100;
             pointer-events: none;
+            opacity: 0;
         }
 
-        .cat-img {
-            width: 220px; /* Bigger Cat */
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
-        }
+        .cat-img { width: 180px; } /* Medium Size */
 
-        .animate-cat {
-            animation: catLifecycle 8s forwards ease-in-out;
+        .cat-active {
+            animation: catLifecycle 6s forwards ease-in-out;
         }
 
         @keyframes catLifecycle {
-            0% { bottom: -300px; }
-            15% { bottom: 20px; } /* Slides up */
-            85% { bottom: 20px; opacity: 1; } /* Stays there */
-            100% { bottom: -300px; opacity: 0; } /* Disappears */
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+            20% { transform: translate(-50%, -50%) scale(1); opacity: 1; } /* Zoom In to center */
+            80% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(3); opacity: 0; filter: blur(10px); } /* Zoom Out Disappear */
         }
 
-        /* Heart Pulse */
-        .big-heart {
-            font-size: 40px;
-            animation: heartPulse 1s infinite;
-            display: block;
-            margin: 10px auto;
+        /* Floating Hearts */
+        .heart {
+            position: fixed; bottom: -20px;
+            animation: float 5s linear infinite;
+            color: var(--pink-primary);
         }
 
-        @keyframes heartPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-
-        .floating-obj {
-            position: absolute; bottom: -50px;
-            animation: floatUp 6s linear infinite;
-            opacity: 0.7;
-        }
-
-        @keyframes floatUp {
+        @keyframes float {
             to { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+
+        .tap-text {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            color: white; font-weight: 600; z-index: 5;
         }
     </style>
 </head>
 <body>
 
-    <div id="overlay">
-        <p style="background: white; padding: 10px 20px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">💖 Tap to Open Card 💖</p>
+    <div class="envelope-wrapper" id="envelope" onclick="openCard()">
+        <div class="tap-text" id="tapLabel">Tap to Open 💌</div>
+        <div class="card">
+            <img src="her-photo.jpg" alt="Pupu" class="profile-img">
+            <h1>Happy Birthday, Pupu!</h1>
+            <p>From your <b>Little Orchid 🌸</b></p>
+            <p>"Some people don't leave the heart when they leave the conversation."</p>
+            <p>I'll always be grateful for you. 💖</p>
+            <span style="font-size: 30px;">🎂</span>
+        </div>
     </div>
 
-    <div class="cat-container" id="catBox">
+    <div class="cat-box" id="catBox">
         <img src="cat.png" class="cat-img" alt="Cat">
     </div>
 
-    <div class="card">
-        <img src="her-photo.jpg" alt="Pupu" class="profile-img">
-        <h1>Happy Birthday, Pupu! 🎂</h1>
-        <p>From your <span class="highlight">Little Orchid 🌸</span></p>
-        <p>"Some people don't leave the heart when they leave the conversation."</p>
-        <p>I'll always be grateful that once... <br> you were mine to care for. 💖</p>
-        <div class="big-heart">💗</div>
-    </div>
-
-    <audio id="song" loop>
+    <audio id="bgSong" loop>
         <source src="song.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-        const overlay = document.getElementById('overlay');
-        const song = document.getElementById('song');
-        const catBox = document.getElementById('catBox');
+        function openCard() {
+            const envelope = document.getElementById('envelope');
+            const song = document.getElementById('bgSong');
+            const catBox = document.getElementById('catBox');
+            const tapLabel = document.getElementById('tapLabel');
 
-        overlay.addEventListener('click', () => {
-            // Play Music
+            // 1. Open Envelope
+            envelope.classList.add('open');
+            tapLabel.style.display = 'none';
+
+            // 2. Play Music
             song.play();
-            overlay.style.display = 'none';
 
-            // Start Cat Animation after 1 second
+            // 3. Cat Animation (Wait for card to pop up)
             setTimeout(() => {
-                catBox.classList.add('animate-cat');
-            }, 1000);
+                catBox.classList.add('cat-active');
+            }, 1500);
 
-            // Start Floating Elements
-            setInterval(createFloatingElement, 300);
-        });
+            // 4. Start Floating Hearts
+            setInterval(createHeart, 400);
+        }
 
-        function createFloatingElement() {
-            const el = document.createElement('div');
-            el.className = 'floating-obj';
-            const isHeart = Math.random() > 0.3;
-            el.innerHTML = isHeart ? '❤️' : '✨';
-            el.style.left = Math.random() * 100 + 'vw';
-            el.style.fontSize = (Math.random() * 20 + 10) + 'px';
-            el.style.animationDuration = (Math.random() * 3 + 4) + 's';
-            document.body.appendChild(el);
-            setTimeout(() => el.remove(), 6000);
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
         }
     </script>
 </body>
